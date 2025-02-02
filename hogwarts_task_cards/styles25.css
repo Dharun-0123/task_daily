@@ -1,0 +1,72 @@
+H1{
+    text-align: center;
+    color: rgb(248, 238, 238);
+    background-color: black;
+    padding: 20px;
+}
+body{
+    background-image: url("img_hp/4285165.jpg");
+    
+    background-size: cover;      /* Added to ensure full coverage */
+    background-repeat: no-repeat; /* Prevents image from repeating */
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    color: bisque;
+    min-height: 100vh;          /* Added to ensure full viewport height */
+    margin: 0;   
+    
+}
+
+.full{
+  
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+
+}
+.card{
+    backdrop-filter: blur(10px);
+    width: 300px;
+   
+    border: 1px solid rgba(0, 0, 0, 0.745);
+    border-radius: 25px;
+}
+
+.img1{
+
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: center; /* Added */
+        align-items: center;   
+ 
+}
+.img1 img{
+width: 100%;
+height: 100%;
+object-fit: contain;
+
+}
+h3{
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+   text-transform: uppercase;
+    font-size: 25px;
+}
+.content{
+    text-align: center;
+    padding: 5px;
+    letter-spacing: 2px;
+   color: rgba(171, 167, 167, 0.808);
+   max-width: 100%;
+  
+  
+}
+.card:hover{
+    background-color: rgb(0, 0, 0);
+   border: 2px solid white;
+   transition: 1s ease ease-in;
+}
