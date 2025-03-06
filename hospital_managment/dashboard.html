@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f6fa;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="card">
+            <h3>Total Patients</h3>
+            <div class="value">1,234</div>
+        </div>
+        <div class="card">
+            <h3>Doctors</h3>
+            <div class="value">45</div>
+        </div>
+        <div class="card">
+            <h3>Today's Appointments</h3>
+            <div class="value">28</div>
+        </div>
+        <div class="card">
+            <h3>Available Beds</h3>
+            <div class="value">52</div>
+        </div>
+        <div class="card">
+            <h3>Emergency Cases</h3>
+            <div class="value">8</div>
+        </div>
+        <div class="card">
+            <h3>Lab Tests Today</h3>
+            <div class="value">156</div>
+        </div>
+        <div class="card">
+            <h3>Surgeries Scheduled</h3>
+            <div class="value">12</div>
+        </div>
+        <div class="card">
+            <h3>Staff on Duty</h3>
+            <div class="value">89</div>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="card">
+            <h3>Patient Statistics</h3>
+            <canvas id="patientChart"></canvas>
+        </div>
+        <div class="card">
+            <h3>Revenue Overview</h3>
+            <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="card">
+            <h3>Department Performance</h3>
+            <canvas id="deptChart"></canvas>
+        </div>
+        <div class="card">
+            <h3>Patient Satisfaction</h3>
+            <canvas id="satisfactionChart"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize charts
+        const patientCtx = document.getElementById('patientChart').getContext('2d');
+        new Chart(patientCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Patient Admissions',
+                    data: [65, 59, 80, 81, 56, 55],
+                    borderColor: '#3498db',
+                    tension: 0.1
+                }]
+            }
+        });
+
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue (₹)',
+                    data: [984000, 1558000, 1230000, 1394000, 1804000, 2050000],
+                    backgroundColor: '#2ecc71'
+                }]
+            }
+        });
+
+        const deptCtx = document.getElementById('deptChart').getContext('2d');
+        new Chart(deptCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Cardiology', 'Neurology', 'Pediatrics', 'Orthopedics', 'General Medicine'],
+                datasets: [{
+                    data: [30, 25, 20, 15, 10],
+                    backgroundColor: ['#e74c3c', '#9b59b6', '#f1c40f', '#1abc9c', '#34495e']
+                }]
+            }
+        });
+
+        const satisfactionCtx = document.getElementById('satisfactionChart').getContext('2d');
+        new Chart(satisfactionCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Staff Behavior', 'Cleanliness', 'Treatment', 'Facilities', 'Wait Time'],
+                datasets: [{
+                    label: 'Patient Satisfaction Score',
+                    data: [4.5, 4.8, 4.6, 4.3, 3.9],
+                    backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                    borderColor: '#3498db'
+                }]
+            }
+        });
+    </script>
+</body>
+</html> 

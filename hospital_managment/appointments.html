@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f6fa;
+        }
+        .appointments-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .appointment-list {
+            margin-top: 20px;
+        }
+        .appointment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .appointment-info {
+            flex: 1;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        .status.confirmed {
+            background: #2ecc71;
+            color: white;
+        }
+        .status.pending {
+            background: #f1c40f;
+            color: white;
+        }
+        .time {
+            color: #666;
+            font-size: 0.9em;
+        }
+        #bookAppointmentBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition:0.2s ease-in;
+        }
+        #bookAppointmentBtn:hover {
+            background: #10b7e6;
+           color: rgba(44, 42, 42, 0.584);
+           transition:0.2s ease-in;
+        }
+        .form-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 600px;
+            position: relative;
+            height: 400PX;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-top: 10PX;
+        }
+        .exit-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #e74c3c;
+            padding: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            border: none;
+            font-size: 20px;
+            line-height: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        button[onclick="addAppointment()"] {
+            width: 100%;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button[onclick="addAppointment()"]:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container" id="appointmentForm">
+        <div class="form-content">
+            <button class="exit-btn" onclick="toggleForm()">×</button>
+            <div class="form-group">
+                <input type="text" id="patientName" placeholder="Patient Name">
+            </div>
+            <div class="form-group">
+                <select id="doctor">
+                    <option value="">Select Doctor</option>
+                    <option value="Dr. Smith">Dr. Smith</option>
+                    <option value="Dr. Brown">Dr. Brown</option>
+                    <option value="Dr. Michael Rodriguez">Dr. Michael Rodriguez</option>
+                    <option value="Dr. Priya Patel">Dr. Priya Patel</option>
+                    <option value="Dr. James Wilson">Dr. James Wilson</option>
+                    <option value="Dr. Kowalski">Dr. Kowalski</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="time" id="appointmentTime">
+            </div>
+            <div class="form-group">
+                <select id="status">
+                    <option value="">Select Status</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="pending">Pending</option>
+                </select>
+            </div>
+            <button onclick="addAppointment()">Book Appointment</button>
+        </div>
+    </div>
+
+    <div class="appointments-container">
+        <h2 style="text-align: center;">Appointments</h2>
+        <div class="appointment-list" id="appointmentList">
+            <div class="appointment-item">
+                <div class="appointment-info">
+                    <h3>John Doe</h3>
+                    <span class="time">09:00 AM - Dr. Smith</span>
+                </div>
+                <span class="status confirmed">Confirmed</span>
+            </div>
+            <div class="appointment-item">
+                <div class="appointment-info">
+                    <h3>Mary Johnson</h3>
+                    <span class="time">10:30 AM - Dr. Brown</span>
+                </div>
+                <span class="status pending">Pending</span>
+            </div>
+        </div>
+    </div>
+    <button id="bookAppointmentBtn" onclick="toggleForm()">+</button>
+
+    <script>
+        function toggleForm() {
+            const form = document.getElementById('appointmentForm');
+            const btn = document.getElementById('bookAppointmentBtn');
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'flex';
+                btn.textContent = '×';
+            } else {
+                form.style.display = 'none';
+                btn.textContent = '+';
+            }
+        }
+
+        function addAppointment() {
+            const name = document.getElementById('patientName').value;
+            const doctor = document.getElementById('doctor').value;
+            const time = document.getElementById('appointmentTime').value;
+            const status = document.getElementById('status').value;
+
+            if (!name || !doctor || !time || !status) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const appointmentList = document.getElementById('appointmentList');
+            const formattedTime = new Date('1970-01-01T' + time).toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            });
+
+            const appointmentHTML = `
+                <div class="appointment-item">
+                    <div class="appointment-info">
+                        <h3>${name}</h3>
+                        <span class="time">${formattedTime} - ${doctor}</span>
+                    </div>
+                    <span class="status ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span>
+                </div>
+            `;
+
+            appointmentList.insertAdjacentHTML('beforeend', appointmentHTML);
+            toggleForm();
+
+            // Clear form
+            document.getElementById('patientName').value = '';
+            document.getElementById('doctor').value = '';
+            document.getElementById('appointmentTime').value = '';
+            document.getElementById('status').value = '';
+        }
+    </script>
+</body>
+</html> 

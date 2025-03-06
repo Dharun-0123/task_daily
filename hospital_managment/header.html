@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #2c3e50, #3498db);
+            color: white;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            height: 60px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .notification {
+            position: relative;
+            cursor: pointer;
+        }
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">🏥 KG Hospital</div>
+        <div class="user-info">
+            <div class="notification" onclick="showNotification()">
+                🔔 <span class="badge">3</span>
+            </div>
+            <div>Dr. John Deo</div>
+        </div>
+    </div>
+    <script>
+        function showNotification() {
+            alert("Notifications:\n1. New patient admission\n2. Emergency case in Ward 3\n3. Staff meeting at 2 PM");
+        }
+    </script>
+</body>
+</html> 
